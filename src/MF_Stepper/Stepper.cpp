@@ -21,8 +21,16 @@ namespace Stepper
         FUNC_MOVETO = 1,
         FUNC_ZETZERO,
         FUNC_SPEEDACCEL,
+        FUNC_RESET,
         START_STOP_2ND_CORE
     };
+#if defined(ARDUINO_ARCH_ESP32)
+    // For communication with 2nd core of ESP32
+    uint8_t command2ndCore     = 0;
+    uint8_t stepper2ndCore     = 0;
+    long    Parameter1_2ndCore = 0;
+    long    Parameter2_2ndCore = 0;
+#endif
 #endif
 
     bool setupArray(uint16_t count)
@@ -79,6 +87,12 @@ namespace Stepper
         rp2040.fifo.push(stepper);
         rp2040.fifo.push(newPos);
         rp2040.fifo.push(false);
+#elif defined(ARDUINO_ARCH_ESP32) && defined(STEPPER_ON_2ND_CORE)
+        // Wait for 2nd core
+        while (command2ndCore) {}
+        stepper2ndCore     = stepper;
+        Parameter1_2ndCore = newPos;
+        command2ndCore     = FUNC_MOVETO;
 #else
         steppers[stepper].moveTo(newPos);
 #endif
@@ -90,7 +104,22 @@ namespace Stepper
 
         if (stepper >= steppersRegistered)
             return;
+
+#if defined(ARDUINO_ARCH_RP2040) && defined(STEPPER_ON_2ND_CORE)
+        // wait for 2nd core
+        rp2040.fifo.pop();
+        rp2040.fifo.push(FUNC_RESET);
+        rp2040.fifo.push(stepper);
+        rp2040.fifo.push(false);
+        rp2040.fifo.push(false);
+#elif defined(ARDUINO_ARCH_ESP32) && defined(STEPPER_ON_2ND_CORE)
+        // Wait for 2nd core
+        while (command2ndCore) {}
+        stepper2ndCore = stepper;
+        command2ndCore = FUNC_RESET;
+#else
         steppers[stepper].reset();
+#endif
     }
 
     void OnSetZero()
@@ -106,6 +135,11 @@ namespace Stepper
         rp2040.fifo.push(stepper);
         rp2040.fifo.push(false);
         rp2040.fifo.push(false);
+#elif defined(ARDUINO_ARCH_ESP32) && defined(STEPPER_ON_2ND_CORE)
+        // Wait for 2nd core
+        while (command2ndCore) {}
+        stepper2ndCore = stepper;
+        command2ndCore = FUNC_ZETZERO;
 #else
         steppers[stepper].setZero();
 #endif
@@ -125,6 +159,13 @@ namespace Stepper
         rp2040.fifo.push(stepper);
         rp2040.fifo.push(maxSpeed);
         rp2040.fifo.push(maxAccel);
+#elif defined(ARDUINO_ARCH_ESP32) && defined(STEPPER_ON_2ND_CORE)
+        // Wait for 2nd core
+        while (command2ndCore) {}
+        stepper2ndCore     = stepper;
+        Parameter1_2ndCore = maxSpeed;
+        Parameter2_2ndCore = maxAccel;
+        command2ndCore     = FUNC_SPEEDACCEL;
 #else
         steppers[stepper].setMaxSpeed(maxSpeed);
         steppers[stepper].setAcceleration(maxAccel);
@@ -208,6 +249,46 @@ void loop1()
             }
             // send ready for next message to 1st core
             rp2040.fifo.push(true);
+        }
+    }
+}
+#endif
+
+#if defined(ARDUINO_ARCH_ESP32) && defined(STEPPER_ON_2ND_CORE)
+TaskHandle_t loop1Handle;
+void         loop1(void *parameter);
+
+void setup1()
+{
+    BaseType_t xReturned = xTaskCreatePinnedToCore(
+        loop1,        /* Function to implement the task */
+        "Stepper",    /* Name of the task */
+        10000,        /* Stack size in words */
+        NULL,         /* Task input parameter */
+        0,            /* Priority of the task 0/1/2 = low/normal/high */
+        &loop1Handle, /* Task handle. */
+        0             /* Core where the task should run */
+    );
+}
+
+void loop1(void *parameter)
+{
+    while (1) {
+        for (uint8_t i = 0; i < Stepper::steppersRegistered; ++i) {
+            Stepper::steppers[i].update();
+        }
+        if (Stepper::command2ndCore) {
+            if (Stepper::command2ndCore == Stepper::FUNC_MOVETO) {
+                Stepper::steppers[Stepper::stepper2ndCore].moveTo(Stepper::Parameter1_2ndCore);
+            } else if (Stepper::command2ndCore == Stepper::FUNC_ZETZERO) {
+                Stepper::steppers[Stepper::stepper2ndCore].setZero();
+            } else if (Stepper::command2ndCore == Stepper::FUNC_SPEEDACCEL) {
+                Stepper::steppers[Stepper::stepper2ndCore].setMaxSpeed(Stepper::Parameter1_2ndCore);
+                Stepper::steppers[Stepper::stepper2ndCore].setAcceleration(Stepper::Parameter2_2ndCore);
+            } else if (Stepper::command2ndCore == Stepper::FUNC_RESET) {
+                Stepper::steppers[Stepper::stepper2ndCore].reset();
+            }
+            Stepper::command2ndCore = 0;
         }
     }
 }

@@ -52,6 +52,7 @@ const unsigned long POWER_SAVING_TIME = 60 * 15; // in seconds
 #if MF_MUX_SUPPORT == 1
 MFMuxDriver MUX;
 #endif
+
 // ==================================================
 //   Polling interval counters
 // ==================================================
@@ -172,6 +173,9 @@ void setup()
     cmdMessenger.printLfCr();
     ResetBoard();
     initPollIntervals();
+#if defined(ARDUINO_ARCH_ESP32) && (defined(USE_2ND_CORE) || defined(STEPPER_ON_2ND_CORE))
+    setup1();
+#endif
 }
 
 // ************************************************************

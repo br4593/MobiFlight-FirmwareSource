@@ -1,0 +1,154 @@
+{
+  "$schema": "./mfboard.schema.json",
+  "AvrDudeSettings": {
+    "Device": "esp32",
+    "BaudRates": ["115200", "921600"],
+    "Programmer": "esptool",
+    "Timeout": 10000
+  },
+  "Connection": {
+    "ConnectionDelay": 1000,
+    "ExtraConnectionRetry": true,
+    "ForceResetOnFirmwareUpdate": true,
+    "DelayAfterFirmwareUpdate": 500,
+    "DtrEnable": true,
+    "MessageSize": 256,
+    "EEPROMSize": 2048
+  },
+  "HardwareIds": ["^VID_303A&PID_80C3"],
+  "Info": {
+    "CanInstallFirmware": true,
+    "CanResetBoard": true,
+    "FirmwareBaseName": "Mobiflight_ESP32-2432S032",
+    "FirmwareExtension": "bin",
+    "FriendlyName": "Mobiflight_ESP32-2432S032",
+    "LatestFirmwareVersion": "2.6.0",
+    "MobiFlightType": "Mobiflight_ESP32-2432S032",
+    "ResetFirmwareFile": "reset.Mobiflight_ESP32-2432S032.bin",
+    "CustomDeviceTypes": [
+      "display"
+    ]
+
+  },
+  "ModuleLimits": {
+    "MaxAnalogInputs": 16,
+    "MaxInputShifters": 6,
+    "MaxButtons": 32,
+    "MaxEncoders": 10,
+    "MaxLcdI2C": 4,
+    "MaxLedSegments": 6,
+    "MaxOutputs": 32,
+    "MaxServos": 10,
+    "MaxShifters": 6,
+    "MaxSteppers": 8,
+    "MaxInputMultiplexer": 6,
+    "MaxCustomDevices": 8
+  },
+  "Pins": [
+    {
+      "isAnalog": true,
+      "isI2C": false,
+      "isPWM": true,
+      "Name": "0",
+      "Pin": 0
+    },
+    {
+      "isAnalog": true,
+      "isI2C": false,
+      "isPWM": true,
+      "Name": "2",
+      "Pin": 2
+    },
+    {
+      "isAnalog": true,
+      "isI2C": false,
+      "isPWM": true,
+      "Name": "4",
+      "Pin": 4
+    },
+    {
+      "isAnalog": true,
+      "isI2C": false,
+      "isPWM": true,
+      "Name": "12",
+      "Pin": 12
+    },
+    {
+      "isAnalog": true,
+      "isI2C": false,
+      "isPWM": true,
+      "Name": "14",
+      "Pin": 14
+    },
+    {
+      "isAnalog": true,
+      "isI2C": false,
+      "isPWM": true,
+      "Name": "15",
+      "Pin": 15
+    },
+    {
+      "isAnalog": true,
+      "isI2C": false,
+      "isPWM": true,
+      "Name": "27",
+      "Pin": 27
+    },
+    {
+      "isAnalog": true,
+      "isI2C": false,
+      "isPWM": true,
+      "Name": "32",
+      "Pin": 32
+    },
+    {
+      "isAnalog": false,
+      "isI2C": true,
+      "isPWM": false,
+      "Name": "21/I2C_SDA",
+      "Pin": 21
+    },
+    {
+      "isAnalog": false,
+      "isI2C": true,
+      "isPWM": false,
+      "Name": "22/I2C_SCL",
+      "Pin": 22
+    },
+    {
+      "isAnalog": false,
+      "isI2C": false,
+      "isPWM": true,
+      "Name": "33/PWM",
+      "Pin": 33
+    },
+    {
+      "isAnalog": false,
+      "isI2C": false,
+      "isPWM": true,
+      "Name": "25",
+      "Pin": 25
+    },
+    {
+      "isAnalog": false,
+      "isI2C": false,
+      "isPWM": true,
+      "Name": "17/Red",
+      "Pin": 17
+    },
+    {
+      "isAnalog": false,
+      "isI2C": false,
+      "isPWM": true,
+      "Name": "4/Green",
+      "Pin": 4
+    },
+    {
+      "isAnalog": false,
+      "isI2C": false,
+      "isPWM": true,
+      "Name": "16/Blue",
+      "Pin": 16
+    }
+  ]
+}

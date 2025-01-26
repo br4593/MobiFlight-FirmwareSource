@@ -1,0 +1,228 @@
+{
+    "$schema": "./mfboard.schema.json",
+    "AvrDudeSettings": {
+      "Device": "atmega2560",
+      "BaudRates": ["115200"],
+      "Programmer": "wiring",
+      "Timeout": 15000
+    },
+    "Connection": {
+      "ConnectionDelay": 2000,
+      "ExtraConnectionRetry": false,
+      "ForceResetOnFirmwareUpdate": false,
+      "DelayAfterFirmwareUpdate": 0,
+      "DtrEnable": true,
+      "MessageSize": 90,
+      "EEPROMSize": 1496
+    },
+    "HardwareIds": ["^VID_303A&PID_80C2"], 
+    "Info": {
+      "CanInstallFirmware": false,
+      "CanResetBoard": false,
+      "FirmwareBaseName": "mobiflight_esp32_s2_mini_merged",
+      "FirmwareExtension": "bin",
+      "FriendlyName": "MobiFlight ESP32 Mini",
+      "LatestFirmwareVersion": "2.5.1",
+      "MobiFlightType": "MobiFlight ESP32S2mini",
+      "ResetFirmwareFile": "reset.esp32_s2_mini_merged.bin"
+    },
+    "ModuleLimits": {
+      "MaxAnalogInputs": 18,
+      "MaxInputShifters": 4,
+      "MaxButtons": 27,
+      "MaxEncoders": 8,
+      "MaxLcdI2C": 2,
+      "MaxLedSegments": 4,
+      "MaxOutputs": 27,
+      "MaxServos": 8,
+      "MaxShifters": 4,
+      "MaxSteppers": 6,
+      "MaxInputMultiplexer": 4,
+      "MaxCustomDevices" : 5
+    },
+    "Pins": [
+      {
+        "isAnalog": true,
+        "isI2C": false,
+        "isPWM": true,
+        "Name": "1/A0",
+        "Pin": 1
+      },
+      {
+        "isAnalog": true,
+        "isI2C": false,
+        "isPWM": true,
+        "Name": "2/A1",
+        "Pin": 2
+      },
+      {
+        "isAnalog": true,
+        "isI2C": false,
+        "isPWM": true,
+        "Name": "3/A2",
+        "Pin": 3
+      },
+      {
+        "isAnalog": true,
+        "isI2C": false,
+        "isPWM": true,
+        "Name": "4/A3",
+        "Pin": 4
+      },
+      {
+        "isAnalog": true,
+        "isI2C": false,
+        "isPWM": true,
+        "Name": "5/A4",
+        "Pin": 5
+      },
+      {
+        "isAnalog": true,
+        "isI2C": false,
+        "isPWM": true,
+        "Name": "6/A5",
+        "Pin": 6
+      },
+      {
+        "isAnalog": true,
+        "isI2C": false,
+        "isPWM": true,
+        "Name": "7/A6",
+        "Pin": 7
+      },
+      {
+        "isAnalog": true,
+        "isI2C": false,
+        "isPWM": true,
+        "Name": "8/A7",
+        "Pin": 8
+      },
+      {
+        "isAnalog": true,
+        "isI2C": false,
+        "isPWM": true,
+        "Name": "9/A8",
+        "Pin": 9
+      },
+      {
+        "isAnalog": true,
+        "isI2C": false,
+        "isPWM": true,
+        "Name": "10/A9",
+        "Pin": 10
+      },
+      {
+        "isAnalog": true,
+        "isI2C": false,
+        "isPWM": true,
+        "Name": "11/A10",
+        "Pin": 11
+      },
+      {
+        "isAnalog": true,
+        "isI2C": false,
+        "isPWM": true,
+        "Name": "12/A11",
+        "Pin": 12
+      },
+      {
+        "isAnalog": true,
+        "isI2C": false,
+        "isPWM": true,
+        "Name": "13/A12",
+        "Pin": 13
+      },
+      {
+        "isAnalog": true,
+        "isI2C": false,
+        "isPWM": true,
+        "Name": "14/A13",
+        "Pin": 14
+      },
+      {
+        "isAnalog": true,
+        "isI2C": false,
+        "isPWM": false,
+        "Name": "15/A14",
+        "Pin": 15
+      },
+      {
+        "isAnalog": true,
+        "isI2C": false,
+        "isPWM": false,
+        "Name": "16/A15",
+        "Pin": 16
+      },
+      {
+        "isAnalog": true,
+        "isI2C": false,
+        "isPWM": false,
+        "Name": "17/A16",
+        "Pin": 17
+      },
+      {
+        "isAnalog": true,
+        "isI2C": false,
+        "isPWM": false,
+        "Name": "18/A17",
+        "Pin": 18
+      },
+      {
+        "isAnalog": false,
+        "isI2C": false,
+        "isPWM": false,
+        "Pin": 21
+      },
+      {
+        "isAnalog": false,
+        "isI2C": true,
+        "isPWM": false,
+        "Name": "33/I2C",
+        "Pin": 33
+      },
+      {
+        "isAnalog": false,
+        "isI2C": false,
+        "isPWM": false,
+        "Pin": 34
+      },
+      {
+        "isAnalog": false,
+        "isI2C": true,
+        "isPWM": false,
+        "Name": "35/I2C",
+        "Pin": 35
+      },
+      {
+        "isAnalog": false,
+        "isI2C": false,
+        "isPWM": false,
+        "Pin": 36
+      },
+      {
+        "isAnalog": false,
+        "isI2C": false,
+        "isPWM": false,
+        "Pin": 37
+      },
+      {
+        "isAnalog": false,
+        "isI2C": false,
+        "isPWM": false,
+        "Pin": 38
+      },
+      {
+        "isAnalog": false,
+        "isI2C": false,
+        "isPWM": false,
+        "Pin": 39
+      },
+      {
+        "isAnalog": false,
+        "isI2C": false,
+        "isPWM": false,
+        "Pin": 40
+      }
+    ]
+  }
+  

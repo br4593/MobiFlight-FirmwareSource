@@ -14,3 +14,6 @@ namespace CustomDevice
     void stopUpdate2ndCore(bool stop);
 #endif
 }
+#if defined(USE_2ND_CORE) && defined(ARDUINO_ARCH_ESP32)
+    void setup1();
+#endif
